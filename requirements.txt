@@ -1,0 +1,7 @@
+numpy==1.26.4
+pydantic>=2.11,<3
+pytest>=9.0
+
+# LIBERO simulator (pulls in robosuite, robomimic, mujoco, bddl, etc.)
+libero==0.1.1
+robosuite==1.4.0
