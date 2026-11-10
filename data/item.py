@@ -1,7 +1,6 @@
 from pydantic import BaseModel, Field
 
-from data.embedding import SegmentEmbedding
-from data.segment import TrajectorySegment
+from data.segment import SegmentEmbedding, TrajectorySegment
 
 
 

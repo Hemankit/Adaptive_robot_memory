@@ -1,8 +1,7 @@
 
 
 from embeddings.embedding_interfaces.segment_embedder import SegmentEmbedder
-from data.embedding import SegmentEmbedding
-from data.segment_data import SegmentData
+from data.segment import SegmentData, SegmentEmbedding
 
 from sklearn.feature_extraction.text import HashingVectorizer
 

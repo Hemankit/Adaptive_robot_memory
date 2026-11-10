@@ -3,7 +3,7 @@ import numpy as np
 
 from data.obs import Observation
 from trajectory_segmentation.storage_interfaces.artifact_store import ArtifactStore
-from data.record import ObservationRecord
+from data.obs import ObservationRecord
 
 class ObservationConverter:
 

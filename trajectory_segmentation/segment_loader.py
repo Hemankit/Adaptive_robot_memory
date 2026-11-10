@@ -1,7 +1,6 @@
 
 
-from data.segment import TrajectorySegment
-from data.segment_data import SegmentData
+from data.segment import SegmentData, TrajectorySegment
 from trajectory_segmentation.storage_interfaces.trajectory_store import TrajectoryStore
 
 

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 from data.episode import EpisodeRecord
-from data.record import ObservationRecord
+from data.obs import ObservationRecord
 from data.step import StepRecord
 
 

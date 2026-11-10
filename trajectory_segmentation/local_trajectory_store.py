@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from data.record import ObservationRecord
+from data.obs import ObservationRecord
 from pydantic.json import pydantic_encoder
 from pydantic import TypeAdapter
 from data.step import StepRecord

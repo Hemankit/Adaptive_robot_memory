@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
-from data.segment_data import SegmentData
-from data.embedding import SegmentEmbedding
+from data.segment import SegmentData, SegmentEmbedding
 
 
 class SegmentEmbedder(ABC):

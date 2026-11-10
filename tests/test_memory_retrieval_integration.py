@@ -3,7 +3,7 @@ import pytest
 
 from data.episode import EpisodeRecord
 from data.query import RetrievalQuery
-from data.record import ObservationRecord
+from data.obs import ObservationRecord
 from data.step import StepRecord
 from embeddings.embedding_interfaces.hashing_embedder import HashingInstructionEmbedder
 from embeddings.embedding_interfaces.hashing_query import HashingInstructionQueryEmbedder
