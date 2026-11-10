@@ -5,9 +5,10 @@ from data.obs import Observation
 from data.segment import SegmentData
 from data.action import Action
 
-class RecordingActionPolicy(ActionPolicy):
+class FixedActionPolicy(ActionPolicy):
 
-    def __init__(self):
+    def __init__(self, action: Action | None = None):
+        self._action = action
         self.retrieval_counts: list[int] = []
 
     def act(
@@ -17,6 +18,8 @@ class RecordingActionPolicy(ActionPolicy):
         retrieved_segments: list[SegmentData],
     ) -> Action:
         self.retrieval_counts.append(len(retrieved_segments))
+        if self._action is not None:
+            return self._action
         return Action(
             action_type="eef_delta_pose",
             values={
