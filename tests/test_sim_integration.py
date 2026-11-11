@@ -18,7 +18,7 @@ def zero_action() -> Action:
     )
 
 
-def zero_action_fn(observation: Observation) -> Action:
+def zero_action_fn(task: TaskSpec, observation: Observation, step_index: int) -> Action:
     return zero_action()
 
 def test_environment_reset():
@@ -144,7 +144,7 @@ def test_rollout_runner():
     # Record every observation the runner hands to the policy.
     received: list[Observation] = []
 
-    def recording_action_fn(observation: Observation) -> Action:
+    def recording_action_fn(task: TaskSpec, observation: Observation, step_index: int) -> Action:
         received.append(observation)
         return zero_action()
 

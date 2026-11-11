@@ -10,7 +10,7 @@ from embeddings.embedding_interfaces.hashing_query import HashingInstructionQuer
 from memory.memory_buider import MemoryBuilder
 from retrieval.retrieval_interfaces.local_cosine import LocalCosineRetriever
 
-from storage.storage_interfaces.local_store import LocalMemoryStore
+from storage.storage_interfaces.local_memory_store import LocalMemoryStore
 from trajectory_segmentation.fixed_window import FixedWindowSegmenter
 from trajectory_segmentation.local_trajectory_store import LocalTrajectoryStore
 from trajectory_segmentation.segment_loader import SegmentLoader

@@ -10,14 +10,15 @@ import numpy as np
 from embeddings.embedding_interfaces.hashing_embedder import HashingInstructionEmbedder
 from embeddings.embedding_interfaces.hashing_query import HashingInstructionQueryEmbedder
 from memory.memory_buider import MemoryBuilder
-from policy.dummy import RecordingActionPolicy
+from policy.dummy import FixedActionPolicy
+from recording.in_memory_recorder import InMemoryRetrievalEventRecorder
 from retrieval.retrieval_interfaces.always_retrieve_controller import AlwaysRetrieveController
 from retrieval.retrieval_interfaces.local_cosine import LocalCosineRetriever
 from retrieval.retrieval_interfaces.never_retrieve_controller import NeverRetrieveController
 from retrieval.retrieval_interfaces.periodic_retrieve_controller import PeriodicRetrieveController
 from retrieval.retrieval_interfaces.retrieval_controller import RetrievalController
 from sim_evaluation.rollout_runner import RolloutRunner
-from storage.storage_interfaces.local_store import LocalMemoryStore
+from storage.storage_interfaces.local_memory_store import LocalMemoryStore
 from storage.storage_interfaces.memory_store import MemoryStore
 from test_memory_retrieval_integration import persist_episode
 from trajectory_segmentation.fixed_window import FixedWindowSegmenter
@@ -31,7 +32,7 @@ RETRIEVAL_K = 2
 ACTION_KEYS = ("dx", "dy", "dz", "dax", "day", "daz", "gripper")
 
 
-class SegmentCapturingPolicy(RecordingActionPolicy):
+class SegmentCapturingPolicy(FixedActionPolicy):
     """Records the retrieved segments themselves, not just their count."""
 
     def __init__(self):
@@ -50,10 +51,10 @@ def build_action_selector(
     memory_store: MemoryStore,
     trajectory_store: TrajectoryStore,
     k: int = RETRIEVAL_K,
-    policy: RecordingActionPolicy | None = None,
+    policy: FixedActionPolicy | None = None,
 ) -> tuple[
     RetrievalAugmentedActionSelector,
-    RecordingActionPolicy,
+    FixedActionPolicy,
 ]:
     query_embedder = HashingInstructionQueryEmbedder(
         dimension=EMBEDDING_DIMENSION,
@@ -65,13 +66,14 @@ def build_action_selector(
     segment_loader = SegmentLoader(
         trajectory_store=trajectory_store,
     )
-    policy = policy if policy is not None else RecordingActionPolicy()
+    policy = policy if policy is not None else FixedActionPolicy()
     selector = RetrievalAugmentedActionSelector(
         controller=controller,
         retriever=retriever,
         segment_loader=segment_loader,
         policy=policy,
         k=k,
+        event_recorder=InMemoryRetrievalEventRecorder(),
     )
     return selector, policy
 

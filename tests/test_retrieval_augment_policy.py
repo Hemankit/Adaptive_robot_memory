@@ -74,6 +74,7 @@ def test_never_retrieve_passes_no_memory_to_policy():
         segment_loader=segment_loader,
         policy=policy,
         k=3,
+        event_recorder=MagicMock(),
     )
 
     action = selector.select_action(
@@ -127,7 +128,8 @@ def test_always_retrieve_passes_segments_to_policy():
     retrieval_result = MagicMock()
 
     retrieval_result.item.segment = retrieved_segment
-
+    retrieved_segment.segment_id = "segment-1"
+    retrieval_result.score = 0.9
     loaded_segment = MagicMock(spec=SegmentData)
 
     retriever.retrieve.return_value = [
@@ -142,6 +144,7 @@ def test_always_retrieve_passes_segments_to_policy():
         segment_loader=segment_loader,
         policy=policy,
         k=3,
+        event_recorder=MagicMock(),
     )
 
     action = selector.select_action(
@@ -211,6 +214,8 @@ def test_retrieved_segment_replay_policy_uses_retrieved_action():
     retrieval_result.item.segment = (
         retrieved_segment_reference
     )
+    retrieved_segment_reference.segment_id = "segment-1"
+    retrieval_result.score = 0.9
 
     retriever.retrieve.return_value = [
         retrieval_result
@@ -226,6 +231,7 @@ def test_retrieved_segment_replay_policy_uses_retrieved_action():
         segment_loader=segment_loader,
         policy=policy,
         k=1,
+        event_recorder=MagicMock(),
     )
 
     task = TaskSpec(
@@ -284,6 +290,7 @@ def test_replay_policy_uses_fallback_when_memory_not_retrieved():
         segment_loader=segment_loader,
         policy=policy,
         k=1,
+        event_recorder=MagicMock(),
     )
 
     task = TaskSpec(
@@ -340,6 +347,8 @@ def test_periodic_retrieval_changes_policy_input_at_expected_steps():
     retrieval_result.item.segment = (
         retrieved_segment_reference
     )
+    retrieved_segment_reference.segment_id = "segment-1"
+    retrieval_result.score = 0.9
 
     loaded_segment = MagicMock(
         spec=SegmentData
@@ -359,6 +368,7 @@ def test_periodic_retrieval_changes_policy_input_at_expected_steps():
         segment_loader=segment_loader,
         policy=policy,
         k=1,
+        event_recorder=MagicMock(),
     )
 
     task = TaskSpec(

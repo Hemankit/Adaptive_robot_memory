@@ -26,7 +26,7 @@ def zero_action() -> Action:
     )
 
 
-def zero_action_fn(observation: Observation) -> Action:
+def zero_action_fn(task: TaskSpec, observation: Observation, step_index: int) -> Action:
     return zero_action()
 
 def test_rollout_can_be_persisted_and_reloaded(tmp_path):
