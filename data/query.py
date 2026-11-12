@@ -22,3 +22,4 @@ class QueryEmbedding(BaseModel):
         ...,
         description="The dimensionality of the query embedding vector.",
     )
+

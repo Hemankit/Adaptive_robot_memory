@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 
 from data.metric import ExperimentMetrics, EpisodeMetrics
+from data.pipeline import PipelineConfig
 from data.task import TaskSpec
 
 
@@ -29,6 +30,11 @@ class ExperimentSpec(BaseModel):
     episodes: list[EpisodeRunSpec] = Field(
         ...,
         description="The ordered episode runs that should be executed as part of the experiment.",
+    )
+
+    pipeline: PipelineConfig = Field(
+        ...,
+        description="The configuration used to construct the experiment pipeline.",
     )
 
 class ExperimentResult(BaseModel):

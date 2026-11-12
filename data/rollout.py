@@ -46,3 +46,13 @@ class RolloutResult(BaseModel):
         ...,
         description="The ordered sequence of recorded rollout steps.",
     )
+
+from pydantic import BaseModel, Field
+
+
+class RolloutConfig(BaseModel):
+    max_steps: int = Field(
+        ...,
+        gt=0,
+        description="The maximum number of action steps allowed for each rollout.",
+    )

@@ -71,3 +71,21 @@ class SegmentEmbedding(BaseModel):
         ...,
         description="The dimensionality of the embedding vector.",
     )
+
+class SegmentationConfig(BaseModel):
+    type: str = Field(
+        default="fixed_window",
+        description="The trajectory segmentation implementation to use.",
+    )
+
+    window_size: int = Field(
+        ...,
+        gt=0,
+        description="The maximum number of action steps contained in each trajectory segment.",
+    )
+
+    stride: int = Field(
+        ...,
+        gt=0,
+        description="The number of action steps between consecutive segment start positions.",
+    )

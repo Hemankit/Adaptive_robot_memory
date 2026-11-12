@@ -14,3 +14,9 @@ class MemoryItem(BaseModel):
         ...,
         description="The fixed-dimensional embedding used to represent this trajectory segment for retrieval.",
     )
+
+class MemoryConfig(BaseModel):
+    source_episode_ids: list[str] = Field(
+        ...,
+        description="The persisted successful episode identifiers used to construct episodic memory.",
+    )
